@@ -253,8 +253,10 @@ public class VuforiaLocalizerImpl implements VuforiaLocalizer
         {
         showLoadingIndicator(View.VISIBLE);
         try {
+            com.vuforia.DataSet dataSet; //TODO:
+
             ObjectTracker tracker = getObjectTracker();
-            com.vuforia.DataSet dataSet = tracker.createDataSet();
+            dataSet = tracker.createDataSet();
             RobotLog.vv(TAG, "loading data set '%s'...", name);
             try {
                 throwIfFail(dataSet.load(name + ".xml", type));
