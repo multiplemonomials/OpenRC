@@ -38,6 +38,7 @@ import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.robotcore.eventloop.EventLoop;
@@ -333,7 +334,8 @@ public class FtcRobotControllerService extends Service implements NetworkConnect
         return networkConnection;
     }
 
-    public NetworkConnection.Event getNetworkConnectionStatus() {
+    public NetworkConnection.Event getNetworkConnectionStatus()
+    {
         return networkConnectionStatus;
     }
 
@@ -507,6 +509,12 @@ public class FtcRobotControllerService extends Service implements NetworkConnect
                 RobotLog.ee(TAG, "Wifi Direct - connected as peer, was expecting Group Owner");
                 ConfigWifiDirectActivity.launch(getBaseContext(), ConfigWifiDirectActivity.Flag.WIFI_DIRECT_FIX_CONFIG);
                 result = CallbackResult.HANDLED;
+                break;
+            case CONNECTED_AS_LAN_SERVER:
+                RobotLog.ii(TAG, "LAN mode - LAN server created");
+                break;
+            case CONNECTED_AS_LAN_PEER:
+                RobotLog.ii(TAG, "LAN mode - LAN client created");
                 break;
             case CONNECTION_INFO_AVAILABLE:
                 RobotLog.ii(TAG, "Network Connection Passphrase: " + networkConnection.getPassphrase());

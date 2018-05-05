@@ -45,7 +45,8 @@ public enum NetworkStatus {
     ACTIVE,
     ENABLED,
     ERROR,
-    CREATED_AP_CONNECTION;
+    CREATED_AP_CONNECTION,
+    LAN_SERVER_CREATED;
 
     public String toString(Context context, Object... args) {
         switch (this) {
@@ -61,6 +62,8 @@ public enum NetworkStatus {
                 return context.getString(R.string.networkStatusError);
             case CREATED_AP_CONNECTION:
                 return String.format(context.getString(R.string.networkStatusCreatedAPConnection), args);
+            case LAN_SERVER_CREATED:
+                return String.format(context.getString(R.string.networkStatusLANServerCreated), args);
             default:
                 return context.getString(R.string.networkStatusInternalError);
         }

@@ -141,6 +141,9 @@ public class UpdateUI {
                 case CONNECTED_AS_GROUP_OWNER:
                     updateNetworkConnectionStatus(NetworkStatus.ENABLED);
                     break;
+                case CONNECTED_AS_LAN_SERVER:
+                    updateNetworkConnectionStatus(NetworkStatus.LAN_SERVER_CREATED, controllerService.getNetworkConnection().getConnectionOwnerName());
+                    break;
                 case ERROR:
                     updateNetworkConnectionStatus(NetworkStatus.ERROR);
                     break;

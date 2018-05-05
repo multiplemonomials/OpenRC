@@ -48,6 +48,8 @@ public abstract class NetworkConnection {
         DISCONNECTED,
         CONNECTION_INFO_AVAILABLE,
         AP_CREATED,
+        CONNECTED_AS_LAN_SERVER,
+        CONNECTED_AS_LAN_PEER,
         ERROR,
         UNKNOWN
     }

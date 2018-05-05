@@ -103,6 +103,7 @@
     <string name="moduleDisplayNameServoController">Modern Robotics USB Servo Controller</string>
     <string name="networkStatusActive">active</string>
     <string name="networkStatusCreatedAPConnection">active on SSID: %s</string>
+    <string name="networkStatusLANServerCreated">LAN mode enabled, IP: %s</string>
     <string name="networkStatusEnabled">enabled</string>
     <string name="networkStatusError">error</string>
     <string name="networkStatusInactive">inactive</string>
