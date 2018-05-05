@@ -48,6 +48,8 @@ public class NetworkConnectionFactory {
                 return null;  // not yet implemented
             case SOFTAP:
                 return SoftApAssistant.getSoftApAssistant(context);
+            case LAN:
+                return LanAssistant.getLanAssistant(context);
             default:
                 return null;
         }

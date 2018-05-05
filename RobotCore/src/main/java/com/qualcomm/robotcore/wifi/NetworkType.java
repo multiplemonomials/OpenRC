@@ -35,7 +35,8 @@ public enum NetworkType {
     WIFIDIRECT,
     LOOPBACK,
     SOFTAP,
-    UNKNOWN_NETWORK_TYPE;
+    UNKNOWN_NETWORK_TYPE,
+    LAN;
 
     public static
     @NonNull
