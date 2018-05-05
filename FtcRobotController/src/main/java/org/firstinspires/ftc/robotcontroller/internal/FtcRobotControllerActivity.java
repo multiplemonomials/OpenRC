@@ -455,7 +455,7 @@ public class FtcRobotControllerActivity extends Activity {
         // Moreover, the non-Wifi-Direct networking is end-of-life, so the simplest and most robust
         // (e.g.: no one can screw things up by messing with the contents of the config file) fix is
         // to do away with configuration file entirely.
-        networkType = NetworkType.WIFIDIRECT;
+        networkType = NetworkType.LAN;
 
         // update the app_settings
         preferencesHelper.writeStringPrefIfDifferent(context.getString(R.string.pref_network_connection_type), networkType.toString());
