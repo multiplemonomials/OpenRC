@@ -34,7 +34,6 @@ package com.qualcomm.robotcore.robocol;
 import com.qualcomm.robotcore.util.Network;
 import com.qualcomm.robotcore.util.RobotLog;
 import com.qualcomm.robotcore.util.TypeConversion;
-
 import org.firstinspires.ftc.robotcore.internal.network.SendOnceRunnable;
 
 import java.io.IOException;
@@ -77,7 +76,14 @@ public class RobocolConfig {
      * @param destAddress destination address
      * @return address to bind to
      */
-    public static InetAddress determineBindAddress(InetAddress destAddress) {
+    public static InetAddress determineBindAddress(InetAddress destAddress)
+    {
+        // special case: if we are trying to bind to the wildcard address, just use that.
+        if(destAddress.isAnyLocalAddress())
+        {
+            return destAddress;
+        }
+
         ArrayList<InetAddress> localIpAddresses = Network.getLocalIpAddresses();
         localIpAddresses = Network.removeLoopbackAddresses(localIpAddresses);
         localIpAddresses = Network.removeIPv6Addresses(localIpAddresses);
