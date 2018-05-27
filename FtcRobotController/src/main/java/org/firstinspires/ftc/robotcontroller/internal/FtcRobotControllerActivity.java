@@ -622,8 +622,8 @@ public class FtcRobotControllerActivity extends Activity {
             }
             else if(key.equals(getString(R.string.pref_network_connection_type)))
             {
-                // must restart robot to switch to LAN mode
-                requestRobotRestart();
+                // must restart app to switch to/from LAN mode
+                ThemedActivity.restartForAppThemeChange(getTag(), getString(R.string.networkTypeChangeRestartNotify));
             }
         }
     }

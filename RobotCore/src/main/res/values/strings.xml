@@ -24,6 +24,7 @@
     <string name="appNameUnknown">Unknown Application</string>
     <string name="appThemeChangeRestartNotifyDS">App color scheme has changed. The driver station will restart.</string>
     <string name="appThemeChangeRestartNotifyRC">App color scheme has changed. The robot controller will restart.</string>
+    <string name="networkTypeChangeRestartNotify">Network type has changed. The app will restart.</string>
     <string name="app_name">RobotCore</string>
     <string name="buttonNameCancel">Cancel</string>
     <string name="buttonNameOK">OK</string>
@@ -157,7 +158,7 @@
     <string name="prefcat_wifi_config">Network Configuration</string>
     <string name="prefcat_wifi_settings">Wifi Settings</string>
     <string name="prefnetwork_type">Network Type</string>
-    <string name="prefnetwork_type_summary">Method of network communications to use (requires robot restart)</string>
+    <string name="prefnetwork_type_summary">Method of network communications to use (app will restart)</string>
     <string name="prefedit_app_theme_ds">Driver Station Color Scheme</string>
     <string name="prefedit_app_theme_rc">Robot Controller Color Scheme</string>
     <string name="prefedit_app_theme_summary_ds">Change the color scheme of the driver station. Note: the app will restart if the color scheme is changed</string>
