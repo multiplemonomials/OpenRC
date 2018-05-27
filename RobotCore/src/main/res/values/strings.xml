@@ -101,9 +101,9 @@
     <string name="moduleDisplayNameLynxUsbDevice">REV Robotics USB Expansion Hub Portal</string>
     <string name="moduleDisplayNameMotorController">Modern Robotics USB DC Motor Controller</string>
     <string name="moduleDisplayNameServoController">Modern Robotics USB Servo Controller</string>
-    <string name="networkStatusActive">active</string>
+    <string name="networkStatusActive">active (Wifi Direct)</string>
     <string name="networkStatusCreatedAPConnection">active on SSID: %s</string>
-    <string name="networkStatusLANServerCreated">LAN mode enabled, IP: %s</string>
+    <string name="networkStatusLANServerCreated">active (LAN mode), IP: %s</string>
     <string name="networkStatusEnabled">enabled</string>
     <string name="networkStatusError">error</string>
     <string name="networkStatusInactive">inactive</string>
@@ -156,6 +156,8 @@
     <string name="prefcat_logging">Logging</string>
     <string name="prefcat_wifi_config">Network Configuration</string>
     <string name="prefcat_wifi_settings">Wifi Settings</string>
+    <string name="prefnetwork_type">Network Type</string>
+    <string name="prefnetwork_type_summary">Method of network communications to use (requires robot restart)</string>
     <string name="prefedit_app_theme_ds">Driver Station Color Scheme</string>
     <string name="prefedit_app_theme_rc">Robot Controller Color Scheme</string>
     <string name="prefedit_app_theme_summary_ds">Change the color scheme of the driver station. Note: the app will restart if the color scheme is changed</string>

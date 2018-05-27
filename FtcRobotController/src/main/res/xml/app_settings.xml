@@ -78,6 +78,13 @@ See https://developer.android.com/guide/topics/ui/settings.html
                 />
         </PreferenceScreen>
 
+        <ListPreference
+            android:title="@string/prefnetwork_type"
+            android:summary="@string/prefnetwork_type_summary"
+            android:key="@string/pref_network_connection_type"
+            android:entries="@array/pref_network_type_option_names"
+            android:entryValues="@array/pref_network_type_options"
+            android:defaultValue="WIFIDIRECT"/>
 
     </PreferenceCategory>
 

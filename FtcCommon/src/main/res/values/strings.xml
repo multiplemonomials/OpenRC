@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Values for network type preference -->
+    <string-array name="pref_network_type_option_names">
+        <item>Wi-Fi Direct</item>
+        <item>Local Area Network</item>
+    </string-array>
+
+    <!-- must match the NetworkType enum -->
+    <string-array name="pref_network_type_options">
+        <item>WIFIDIRECT</item>
+        <item>LAN</item>
+    </string-array>
+
+</resources>
