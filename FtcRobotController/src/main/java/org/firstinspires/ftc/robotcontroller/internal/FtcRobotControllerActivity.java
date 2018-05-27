@@ -33,11 +33,7 @@ package org.firstinspires.ftc.robotcontroller.internal;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.ComponentName;
-import android.content.Context;
-import android.content.Intent;
-import android.content.ServiceConnection;
-import android.content.SharedPreferences;
+import android.content.*;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.hardware.usb.UsbDevice;
@@ -55,24 +51,14 @@ import android.webkit.WebView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
 import com.google.blocks.ftcrobotcontroller.BlocksActivity;
 import com.google.blocks.ftcrobotcontroller.ProgrammingModeActivity;
 import com.google.blocks.ftcrobotcontroller.ProgrammingModeControllerImpl;
 import com.google.blocks.ftcrobotcontroller.ProgrammingWebHandlers;
 import com.google.blocks.ftcrobotcontroller.runtime.BlocksOpMode;
-import com.qualcomm.ftccommon.AboutActivity;
-import com.qualcomm.ftccommon.ClassManagerFactory;
-import com.qualcomm.ftccommon.FtcEventLoop;
-import com.qualcomm.ftccommon.FtcEventLoopIdle;
-import com.qualcomm.ftccommon.FtcRobotControllerService;
+import com.qualcomm.ftccommon.*;
 import com.qualcomm.ftccommon.FtcRobotControllerService.FtcRobotControllerBinder;
-import com.qualcomm.ftccommon.FtcRobotControllerSettingsActivity;
-import com.qualcomm.ftccommon.LaunchActivityConstantsList;
 import com.qualcomm.ftccommon.LaunchActivityConstantsList.RequestCode;
-import com.qualcomm.ftccommon.ProgrammingModeController;
-import com.qualcomm.ftccommon.Restarter;
-import com.qualcomm.ftccommon.UpdateUI;
 import com.qualcomm.ftccommon.configuration.EditParameters;
 import com.qualcomm.ftccommon.configuration.FtcLoadFileActivity;
 import com.qualcomm.ftccommon.configuration.RobotConfigFile;
@@ -88,10 +74,8 @@ import com.qualcomm.robotcore.hardware.configuration.Utility;
 import com.qualcomm.robotcore.util.Dimmer;
 import com.qualcomm.robotcore.util.ImmersiveMode;
 import com.qualcomm.robotcore.util.RobotLog;
-import com.qualcomm.robotcore.wifi.NetworkConnectionFactory;
 import com.qualcomm.robotcore.wifi.NetworkType;
 import com.qualcomm.robotcore.wifi.WifiDirectAssistant;
-
 import org.firstinspires.ftc.ftccommon.external.SoundPlayingRobotMonitor;
 import org.firstinspires.ftc.ftccommon.internal.FtcRobotControllerWatchdogService;
 import org.firstinspires.ftc.ftccommon.internal.ProgramAndManageActivity;
@@ -330,7 +314,6 @@ public class FtcRobotControllerActivity extends Activity {
 
         wifiLock.acquire();
         callback.networkConnectionUpdate(WifiDirectAssistant.Event.DISCONNECTED);
-        readNetworkType();
         ServiceController.startService(FtcRobotControllerWatchdogService.class);
         bindToService();
         logPackageVersions();
@@ -418,9 +401,7 @@ public class FtcRobotControllerActivity extends Activity {
     }
 
     protected void bindToService() {
-        readNetworkType();
         Intent intent = new Intent(this, FtcRobotControllerService.class);
-        intent.putExtra(NetworkConnectionFactory.NETWORK_CONNECTION_TYPE, networkType);
         bindService(intent, connection, Context.BIND_AUTO_CREATE);
     }
 
@@ -443,22 +424,6 @@ public class FtcRobotControllerActivity extends Activity {
         RobotLog.logBuildConfig(com.qualcomm.ftccommon.BuildConfig.class);
         RobotLog.logBuildConfig(com.google.blocks.BuildConfig.class);
         RobotLog.logBuildConfig(org.firstinspires.inspection.BuildConfig.class);
-    }
-
-    protected void readNetworkType() {
-
-        // The code here used to defer to the value found in a configuration file
-        // to configure the network type. If the file was absent, then it initialized
-        // it with a default.
-        //
-        // However, bugs have been reported with that approach (empty config files, specifically).
-        // Moreover, the non-Wifi-Direct networking is end-of-life, so the simplest and most robust
-        // (e.g.: no one can screw things up by messing with the contents of the config file) fix is
-        // to do away with configuration file entirely.
-        networkType = NetworkType.LAN;
-
-        // update the app_settings
-        preferencesHelper.writeStringPrefIfDifferent(context.getString(R.string.pref_network_connection_type), networkType.toString());
     }
 
     @Override
@@ -654,6 +619,11 @@ public class FtcRobotControllerActivity extends Activity {
         public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
             if (key.equals(context.getString(R.string.pref_app_theme))) {
                 ThemedActivity.restartForAppThemeChange(getTag(), getString(R.string.appThemeChangeRestartNotifyRC));
+            }
+            else if(key.equals(getString(R.string.pref_network_connection_type)))
+            {
+                // must restart robot to switch to LAN mode
+                requestRobotRestart();
             }
         }
     }

@@ -210,7 +210,7 @@ public class UpdateUI {
         void refreshNetworkStatus() {
             String format = activity.getString(R.string.networkStatusFormat);
             String strNetworkStatus = networkStatus.toString(activity, networkStatusExtra);
-            String strPeerStatus = peerStatus == PeerStatus.UNKNOWN ? "" : String.format(", %s", peerStatus.toString(activity));
+            String strPeerStatus = peerStatus == PeerStatus.UNKNOWN ? "" : String.format(", peer %s", peerStatus.toString(activity));
             final String message = String.format(format, strNetworkStatus, strPeerStatus);
 
             // Log if changed

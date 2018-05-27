@@ -38,8 +38,6 @@ import android.os.Binder;
 import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.NonNull;
-import android.util.Log;
-
 import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.robotcore.eventloop.EventLoop;
 import com.qualcomm.robotcore.eventloop.EventLoopManager;
@@ -62,7 +60,6 @@ import com.qualcomm.robotcore.wifi.NetworkConnection;
 import com.qualcomm.robotcore.wifi.NetworkConnectionFactory;
 import com.qualcomm.robotcore.wifi.NetworkType;
 import com.qualcomm.robotcore.wifi.WifiDirectAssistant;
-
 import org.firstinspires.ftc.robotcore.internal.hardware.DragonboardIndicatorLED;
 import org.firstinspires.ftc.robotcore.internal.network.CallbackResult;
 import org.firstinspires.ftc.robotcore.internal.network.PeerStatus;
@@ -376,7 +373,18 @@ public class FtcRobotControllerService extends Service implements NetworkConnect
         preferencesHelper.writeBooleanPrefIfDifferent(getString(R.string.pref_has_independent_phone_battery), !LynxConstants.isRevControlHub());
         FtcLynxFirmwareUpdateActivity.initializeDirectories();
 
-        NetworkType networkType = (NetworkType) intent.getSerializableExtra(NetworkConnectionFactory.NETWORK_CONNECTION_TYPE);
+        // parse network type from preference
+        NetworkType networkType;
+        try
+        {
+            networkType = NetworkType.valueOf(preferencesHelper.readString(getString(R.string.pref_network_connection_type), NetworkType.WIFIDIRECT.name()));
+        }
+        catch(IllegalArgumentException ex)
+        {
+            RobotLog.ee(TAG, ex, "Error reading network connection type preference, falling back to wifi direct");
+            networkType = NetworkType.WIFIDIRECT;
+        }
+
         networkConnection = NetworkConnectionFactory.getNetworkConnection(networkType, getBaseContext());
         networkConnection.setCallback(this);
 
